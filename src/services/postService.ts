@@ -2,6 +2,9 @@ import { supabase } from "@/lib/supabase";
 import { Post } from "@/types";
 
 export class PostService {
+  /**
+   * 記事取得メソッド
+   */
   async getPosts(): Promise<Post[]> {
     const { data, error } = await supabase
       .from("posts")
@@ -15,7 +18,11 @@ export class PostService {
     return data as Post[];
   }
 
-  // 特定の記事を1つ取得するメソッド
+  /**
+   * 特定の記事を取得するメソッド
+   * @param id 
+   * @returns
+   */
   async getPostById(id: string): Promise<Post | null> {
     const { data, error } = await supabase
       .from("posts")
