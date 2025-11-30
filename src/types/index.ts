@@ -17,7 +17,15 @@ export interface Post {
   content: string;
   thumbnail_url: string | null;
   status: "draft" | "published";
-  category_id: string;
+  category_id: string | null;
+  category: Category | null;
+  tag_id: string | null;
+  tags: Tag[] | null;
   created_at: string;
   updated_at: string;
 }
+
+export type CreatePostInput = Pick<Post, "title" | "content"> & {
+  category_id?: string;
+  status: "draft" | "published";
+};

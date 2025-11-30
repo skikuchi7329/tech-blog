@@ -1,17 +1,22 @@
-type Props = React.TextareaHTMLAttributes<HTMLTextAreaElement> & {
-  label?: string;
-};
+import * as React from "react"
 
-export const Textarea = ({ label, className = "", ...props }: Props) => {
+import { cn } from "@/lib/utils"
+
+const Textarea = React.forwardRef<
+  HTMLTextAreaElement,
+  React.ComponentProps<"textarea">
+>(({ className, ...props }, ref) => {
   return (
-    <div className="flex flex-col gap-1">
-      {label && (
-        <label className="text-sm font-bold text-gray-700">{label}</label>
+    <textarea
+      className={cn(
+        "flex min-h-[60px] w-full rounded-md border border-input bg-transparent px-3 py-2 text-base shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
+        className
       )}
-      <textarea
-        className={`border border-gray-300 rounded p-2 min-h-[150px] focus:outline-none focus:ring-2 focus:ring-blue-500 ${className}`}
-        {...props}
-      />
-    </div>
-  );
-};
+      ref={ref}
+      {...props}
+    />
+  )
+})
+Textarea.displayName = "Textarea"
+
+export { Textarea }
